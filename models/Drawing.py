@@ -6,14 +6,14 @@ from app import db
 
 
 
-class Work(db.Entity):
+class Drawing(db.Entity):
     first = Required(str)
     second = Required(str)
     third = Required(str)
 
 
 
-class WorkSchema(Schema):
+class DrawingSchema(Schema):
     id = fields.Int(dump_only=True)
     first = fields.String(required=True)
     second = fields.String(required=True)

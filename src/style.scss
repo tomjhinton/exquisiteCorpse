@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Passio";
+  src: url("assets/Passio-Graphis.otf") format("opentype");
+}
+
+*{
+  font-weight: bold;
+  font-family: 'Passio'
+}
+
+.first{
+  border: 1px solid black;
+  margin-left: 15vw;
+  margin-top: 5vh;
+}
+
+.second{
+  border: 1px solid black;
+  margin-left: 15vw;
+  
+}
+
+.third{
+  border: 1px solid black;
+  margin-left: 15vw;
+  
+}
+
+.side{
+  border-right:  5px solid black;
+  height: 100vh;
+}
