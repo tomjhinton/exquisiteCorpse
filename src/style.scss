@@ -14,19 +14,72 @@
   margin-top: 5vh;
 }
 
+.firstImage{
+  border: 1px solid black;
+  margin-left: 15vw;
+  margin-top: 5vh;
+  clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
+
+}
+
 .second{
   border: 1px solid black;
   margin-left: 15vw;
-  
+
+}
+
+.secondImage{
+  border: 1px solid black;
+  margin-left: 15vw;
+  margin-top: 5vh;
+  clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
+
 }
 
 .third{
   border: 1px solid black;
   margin-left: 15vw;
-  
+
+}
+
+.thirdImage{
+  border: 1px solid black;
+  margin-left: 15vw;
+  margin-top: 5vh;
+  clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
+
 }
 
 .side{
   border-right:  5px solid black;
   height: 100vh;
+}
+
+.brushW{
+  text-align: center;
+  font-size: 2em;
+  cursor: pointer;
+  user-select: none;
+
+}
+
+.brushH{
+  text-align: center;
+  font-size: 2em;
+  cursor: pointer;
+  user-select: none;
+
+}
+
+.brushes{
+  padding-top: 5vh;
+}
+
+.side{
+  padding-top: 5vh;
+}
+
+.submit{
+  cursor: pointer;
+  text-decoration: underline;
 }

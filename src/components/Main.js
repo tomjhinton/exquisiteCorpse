@@ -59,7 +59,7 @@ class Main extends React.Component{
       <div className="body">
 
 
-      <div onClick={this.create} className='create'>NEW CORPSE</div>
+        <div onClick={this.create} className='create'>NEW CORPSE</div>
       </div>
 
 
