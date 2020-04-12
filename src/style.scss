@@ -8,45 +8,48 @@
   font-family: 'Passio'
 }
 
+
+.clip{
+  clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
+}
+
+.blur{
+  filter: blur(100%);
+}
+
 .first{
-  border: 1px solid black;
-  margin-left: 15vw;
-  margin-top: 5vh;
+  border-bottom:  1px solid black;
 }
 
 .firstImage{
-  border: 1px solid black;
-  margin-left: 15vw;
-  margin-top: 5vh;
+  border-bottom:  1px solid black;
   clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
-
+  pointer-events: none;
 }
 
 .second{
-  border: 1px solid black;
-  margin-left: 15vw;
+  border-bottom:  1px solid black;
 
 }
 
 .secondImage{
-  border: 1px solid black;
-  margin-left: 15vw;
+  border-bottom:  1px solid black;
   margin-top: 5vh;
   clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
+  pointer-events: none;
 
 }
 
 .third{
-  border: 1px solid black;
-  margin-left: 15vw;
+  border-bottom:  1px solid black;
 
 }
 
 .thirdImage{
-  border: 1px solid black;
-  margin-left: 15vw;
+  border-bottom:  1px solid black;
   margin-top: 5vh;
-  clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
+  clip-path: polygon(0 90%, 100% 90%, 100% 100%, 0% 100%);
+  pointer-events: none;
 
 }
 
@@ -86,4 +89,11 @@
 
 .brush{
   border: 1px solid black;
+}
+
+.board{
+  border: 1px solid black;
+  margin-left: 15vw;
+  width:640px;
+  margin-top: 5vh;
 }

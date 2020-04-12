@@ -39,14 +39,14 @@ class Drawing extends React.Component {
     axios.get(`/api/drawings/${this.props.match.params.id}`)
       .then(res => this.setState({corpse: res.data}))
 
-      let brush = document.getElementById('brush')
-      let  context = brush.getContext('2d')
+    const brush = document.getElementById('brush')
+    const  context = brush.getContext('2d')
 
-      setInterval(() =>{
-        context.clearRect(0, 0, brush.width, brush.height);
-        context.fillStyle = this.state.color
-        context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-      }, 10);
+    setInterval(() =>{
+      context.clearRect(0, 0, brush.width, brush.height)
+      context.fillStyle = this.state.color
+      context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+    }, 10)
 
   }
 
@@ -113,28 +113,25 @@ class Drawing extends React.Component {
         .then(res => console.log(res))
 
 
-    }
-    else if(this.state.corpse.second ==='second'){
+    } else if(this.state.corpse.second ==='second'){
       canvas = document.getElementById('second')
       ctx = canvas.getContext('2d')
-      let image = canvas.toDataURL()
+      const image = canvas.toDataURL()
       console.log(image)
       console.log(typeof(image))
-      let corpse = {...this.state.corpse}
+      const corpse = {...this.state.corpse}
       corpse.second = image
       this.setState({corpse: corpse})
       axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
         .then(res => console.log(res))
 
-    }
-
-    else if(this.state.corpse.third ==='third'){
+    } else if(this.state.corpse.third ==='third'){
       canvas = document.getElementById('third')
       ctx = canvas.getContext('2d')
-      let image = canvas.toDataURL()
+      const image = canvas.toDataURL()
       console.log(image)
       console.log(typeof(image))
-      let corpse = {...this.state.corpse}
+      const corpse = {...this.state.corpse}
       corpse.third = image
       this.setState({corpse: corpse})
       axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
@@ -202,23 +199,25 @@ class Drawing extends React.Component {
               </div>
             </div>
             <p>Brush</p>
-              <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
+            <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
             <div className='submit' onClick={this.submit}>
             SUBMIT
             </div>
           </div>
           <div className='column main'>
-            {this.state.corpse && this.state.corpse.first ==='first' && <canvas  className='first'  id='first' width={640} height={240} onMouseMove={this.draw}> </canvas>}
+            <div className='board'>
+              {this.state.corpse && this.state.corpse.first ==='first' && <canvas  className='first'  id='first' width={640} height={240} onMouseMove={this.draw}> </canvas>}
 
-            {this.state.corpse.first !=='first' && <img src={this.state.corpse.first} className='firstImage'/>}
+              {this.state.corpse.first !=='first' && <img src={this.state.corpse.first} className='firstImage'/>}
 
-            {this.state.corpse && this.state.corpse.second ==='second' && this.state.corpse.first !=='first' && <canvas  className='second' id='second' width={640} height={240} onMouseMove={this.draw}> </canvas>}
+              {this.state.corpse && this.state.corpse.second ==='second' && this.state.corpse.first !=='first' && <canvas  className='second' id='second' width={640} height={240} onMouseMove={this.draw}> </canvas>}
 
-            {this.state.corpse.second !=='second' && <img src={this.state.corpse.second} className='firstImage'/>}
+              {this.state.corpse.second !=='second' && <img src={this.state.corpse.second} className='firstImage'/>}
 
-            {this.state.corpse && this.state.corpse.third ==='third' && this.state.corpse.first !=='first' && this.state.corpse.second !=='second' && <canvas  className='third' id='third' width={640} height={240} onMouseMove={this.draw}> </canvas>}
+              {this.state.corpse && this.state.corpse.third ==='third' && this.state.corpse.first !=='first' && this.state.corpse.second !=='second' && <canvas  className='third' id='third' width={640} height={240} onMouseMove={this.draw}> </canvas>}
 
-            {this.state.corpse.third !=='third' && <img src={this.state.corpse.third} className='firstImage'/>}
+              {this.state.corpse.third !=='third' && <img src={this.state.corpse.third} className='firstImage'/>}
+            </div>
 
 
           </div>
