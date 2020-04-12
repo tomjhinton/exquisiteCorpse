@@ -42,7 +42,6 @@ class Drawing extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props.match)
     axios.get(`/api/drawings/${this.props.match.params.id}`)
       .then(res => this.setState({corpse: res.data}))
 
@@ -135,7 +134,6 @@ class Drawing extends React.Component {
       canvas = document.getElementById('first')
       ctx = canvas.getContext('2d')
       const rect = canvas.getBoundingClientRect()
-      console.log(e)
       ctx.fillStyle = this.state.color
       ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
 
@@ -145,7 +143,6 @@ class Drawing extends React.Component {
       canvas = document.getElementById('second')
       ctx = canvas.getContext('2d')
       const rect = canvas.getBoundingClientRect()
-      console.log(e)
       ctx.fillStyle = this.state.color
       ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
     }
@@ -211,7 +208,6 @@ class Drawing extends React.Component {
   }
 
   increaseB(e){
-    console.log('hiya')
     if(this.state[e.target.id]>=0){
       this.setState({ [e.target.id]: this.state[e.target.id]+ 1 })
     }
@@ -224,7 +220,7 @@ class Drawing extends React.Component {
     }
   }
 
-  
+
 
   render(){
 
@@ -233,7 +229,7 @@ class Drawing extends React.Component {
 
       <div className='container' onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}>
         <div className='columns is-multiline'>
-          <div className='column is-3 side'>
+          <div className='column is-4 side'>
             <SwatchesPicker onChangeComplete={ this.handleChangeComplete }/>
             <div className='brushes'>Brush  Width : {this.state.brushW}</div>
             <div className='columns is-multiline'>
