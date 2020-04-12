@@ -39,6 +39,15 @@ class Drawing extends React.Component {
     axios.get(`/api/drawings/${this.props.match.params.id}`)
       .then(res => this.setState({corpse: res.data}))
 
+      let brush = document.getElementById('brush')
+      let  context = brush.getContext('2d')
+
+      setInterval(() =>{
+        context.clearRect(0, 0, brush.width, brush.height);
+        context.fillStyle = this.state.color
+        context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+      }, 10);
+
   }
 
 
@@ -192,6 +201,8 @@ class Drawing extends React.Component {
 
               </div>
             </div>
+            <p>Brush</p>
+              <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
             <div className='submit' onClick={this.submit}>
             SUBMIT
             </div>
