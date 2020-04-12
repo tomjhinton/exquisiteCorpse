@@ -95,12 +95,14 @@ class Drawing extends React.Component {
     if(this.state.corpse.first ==='first'){
       canvas = document.getElementById('first')
       ctx = canvas.getContext('2d')
-      let image = canvas.toDataURL()
-      console.log(image)
-      console.log(typeof(image))
-      let corpse = {...this.state.corpse}
+      const image = canvas.toDataURL()
+      const corpse = {...this.state.corpse}
       corpse.first = image
+      delete corpse.id
       this.setState({corpse: corpse})
+      axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
+        .then(res => console.log(res))
+
 
     }
     else if(this.state.corpse.second ==='second'){
@@ -112,6 +114,8 @@ class Drawing extends React.Component {
       let corpse = {...this.state.corpse}
       corpse.second = image
       this.setState({corpse: corpse})
+      axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
+        .then(res => console.log(res))
 
     }
 
@@ -124,6 +128,8 @@ class Drawing extends React.Component {
       let corpse = {...this.state.corpse}
       corpse.third = image
       this.setState({corpse: corpse})
+      axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
+        .then(res => console.log(res))
 
 
 
