@@ -162,7 +162,7 @@ class Drawing extends React.Component {
 
       }
 
-      if(e.touches[0].target.id ==='first' && this.state.click){
+      if(e.touches && e.touches[0].target.id ==='first' && this.state.click){
         canvas = document.getElementById('first')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -171,7 +171,7 @@ class Drawing extends React.Component {
 
 
       }
-      if(e.touches[0].target.id ==='second' && this.state.click){
+      if(e.touches && e.touches[0].target.id ==='second' && this.state.click){
         canvas = document.getElementById('second')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -179,7 +179,7 @@ class Drawing extends React.Component {
         ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
       }
 
-      if(e.touches[0].target.id ==='third' && this.state.click){
+      if(e.touches && e.touches[0].target.id ==='third' && this.state.click){
         canvas = document.getElementById('third')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
