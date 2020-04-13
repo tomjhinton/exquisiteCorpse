@@ -46,7 +46,7 @@ class Drawing extends React.Component {
     this.toggleFill = this.toggleFill.bind(this)
     this.fill = this.fill.bind(this)
     this.toggleStraight = this.toggleStraight.bind(this)
-    
+
 
   }
 
@@ -100,7 +100,7 @@ class Drawing extends React.Component {
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
       ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
-		    ctx.stroke();
+      ctx.stroke()
 
 
 
@@ -111,8 +111,8 @@ class Drawing extends React.Component {
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
-      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top);
-			ctx.stroke();
+      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
+      ctx.stroke()
 
     }
 
@@ -122,8 +122,8 @@ class Drawing extends React.Component {
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
-      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top);
-			ctx.stroke();
+      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
+      ctx.stroke()
 
 
 
@@ -140,7 +140,8 @@ class Drawing extends React.Component {
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
-      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top);
+      ctx.beginPath()
+      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top)
 
 
 
@@ -152,7 +153,8 @@ class Drawing extends React.Component {
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
-      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top);
+      ctx.beginPath()
+      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top)
 
 
     }
@@ -163,7 +165,8 @@ class Drawing extends React.Component {
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
-      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top);
+      ctx.beginPath()
+      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top)
 
 
 
@@ -336,12 +339,22 @@ class Drawing extends React.Component {
     this.setState(prevState => ({
       fill: !prevState.fill
     }))
+    if(this.state.straight){
+      this.setState(prevState => ({
+        straight: !prevState.straight
+      }))
+    }
   }
 
   toggleStraight(){
     this.setState(prevState => ({
       straight: !prevState.straight
     }))
+    if(this.state.fill){
+      this.setState(prevState => ({
+        fill: !prevState.fill
+      }))
+    }
   }
 
   fill(e){
