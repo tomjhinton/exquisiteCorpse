@@ -120,6 +120,10 @@ class Drawing extends React.Component {
         ctx.lineWidth = (this.state.circle *2)
       }
       ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
+      if(e.touches){
+        ctx.lineTo(e.touches[0].clientX-rect.left,e.touches[0].clientY-rect.top)
+
+      }
       ctx.stroke()
 
 
@@ -140,6 +144,10 @@ class Drawing extends React.Component {
       ctx.lineWidth = this.state.brushW
       ctx.beginPath()
       ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top)
+      if(e.touches){
+        ctx.moveTo(e.touches[0].clientX-rect.left,e.touches[0].clientY-rect.top)
+
+      }
 
 
 
