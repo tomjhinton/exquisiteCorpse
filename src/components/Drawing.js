@@ -21,6 +21,11 @@ class Drawing extends React.Component {
       brushW: 4,
       image: '',
       fill: false,
+      straight: false,
+      straightStart: {
+        x: 0,
+        y: 0
+      },
       new: {
         first: 'first',
         second: 'second',
@@ -40,6 +45,8 @@ class Drawing extends React.Component {
     this.clear = this.clear.bind(this)
     this.toggleFill = this.toggleFill.bind(this)
     this.fill = this.fill.bind(this)
+    this.toggleStraight = this.toggleStraight.bind(this)
+    
 
   }
 
@@ -83,15 +90,85 @@ class Drawing extends React.Component {
 
   }
 
-  mouseUp(){
-
+  mouseUp(e){
+    let ctx, canvas
     this.setState({click: false})
+    if(e.target.id ==='first' && this.state.straight){
+      canvas = document.getElementById('first')
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.strokeStyle = this.state.color
+      ctx.lineWidth = this.state.brushW
+      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
+		    ctx.stroke();
+
+
+
+    }
+    if(e.target.id ==='second' && this.state.straight){
+      canvas = document.getElementById('second')
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.strokeStyle = this.state.color
+      ctx.lineWidth = this.state.brushW
+      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top);
+			ctx.stroke();
+
+    }
+
+    if(e.target.id ==='third' && this.state.straight){
+      canvas = document.getElementById('third')
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.strokeStyle = this.state.color
+      ctx.lineWidth = this.state.brushW
+      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top);
+			ctx.stroke();
+
+
+
+    }
 
   }
 
-  mouseDown(){
-
+  mouseDown(e){
+    let ctx, canvas
     this.setState({click: true})
+    if(e.target.id ==='first' && this.state.straight){
+      canvas = document.getElementById('first')
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.strokeStyle = this.state.color
+      ctx.lineWidth = this.state.brushW
+      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top);
+
+
+
+
+    }
+    if(e.target.id ==='second' && this.state.straight){
+      canvas = document.getElementById('second')
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.strokeStyle = this.state.color
+      ctx.lineWidth = this.state.brushW
+      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top);
+
+
+    }
+
+    if(e.target.id ==='third' && this.state.straight){
+      canvas = document.getElementById('third')
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.strokeStyle = this.state.color
+      ctx.lineWidth = this.state.brushW
+      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top);
+
+
+
+
+    }
 
   }
 
@@ -138,7 +215,7 @@ class Drawing extends React.Component {
     if(!this.state.fill){
 
 
-      if(e.target.id ==='first' && this.state.click){
+      if(e.target.id ==='first' && this.state.click && !this.state.straight){
         canvas = document.getElementById('first')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -147,7 +224,7 @@ class Drawing extends React.Component {
 
 
       }
-      if(e.target.id ==='second' && this.state.click){
+      if(e.target.id ==='second' && this.state.click && !this.state.straight){
         canvas = document.getElementById('second')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -155,7 +232,7 @@ class Drawing extends React.Component {
         ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
       }
 
-      if(e.target.id ==='third' && this.state.click){
+      if(e.target.id ==='third' && this.state.click && !this.state.straight){
         canvas = document.getElementById('third')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -165,7 +242,7 @@ class Drawing extends React.Component {
 
       }
 
-      if(e.touches && e.touches[0].target.id ==='first' && this.state.click){
+      if(e.touches && e.touches[0].target.id ==='first' && this.state.click && !this.state.straight){
         canvas = document.getElementById('first')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -174,7 +251,7 @@ class Drawing extends React.Component {
 
 
       }
-      if(e.touches && e.touches[0].target.id ==='second' && this.state.click){
+      if(e.touches && e.touches[0].target.id ==='second' && this.state.click && !this.state.straight){
         canvas = document.getElementById('second')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -182,7 +259,7 @@ class Drawing extends React.Component {
         ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
       }
 
-      if(e.touches && e.touches[0].target.id ==='third' && this.state.click){
+      if(e.touches && e.touches[0].target.id ==='third' && this.state.click && !this.state.straight){
         canvas = document.getElementById('third')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
@@ -258,6 +335,12 @@ class Drawing extends React.Component {
   toggleFill(){
     this.setState(prevState => ({
       fill: !prevState.fill
+    }))
+  }
+
+  toggleStraight(){
+    this.setState(prevState => ({
+      straight: !prevState.straight
     }))
   }
 
@@ -340,6 +423,10 @@ class Drawing extends React.Component {
 
             <div className={'fill '+  (this.state.fill ? 'selected' : '')} onClick={this.toggleFill}>
             FILL
+            </div>
+
+            <div className={'straight '+  (this.state.straight ? 'selected' : '')} onClick={this.toggleStraight}>
+            Straight Line
             </div>
 
             <div className='clear' onClick={this.clear}>
