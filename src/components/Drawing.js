@@ -16,16 +16,13 @@ class Drawing extends React.Component {
       },
       click: false,
       color: 'black',
-      brush: 'rect',
+      brushShape: 'rect',
       brushH: 4,
       brushW: 4,
+      circle: 8,
       image: '',
       fill: false,
       straight: false,
-      straightStart: {
-        x: 0,
-        y: 0
-      },
       new: {
         first: 'first',
         second: 'second',
@@ -48,6 +45,7 @@ class Drawing extends React.Component {
     this.toggleStraight = this.toggleStraight.bind(this)
     this.keyUp = this.keyUp.bind(this)
     this.keyDown = this.keyDown.bind(this)
+    this.brushShape = this.brushShape.bind(this)
 
 
   }
@@ -63,7 +61,22 @@ class Drawing extends React.Component {
     setInterval(() =>{
       context.clearRect(0, 0, brush.width, brush.height)
       context.fillStyle = this.state.color
-      context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+      if(this.state.brushShape === 'rect'){
+        context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+      }
+      if(this.state.brushShape === 'circ'){
+        context.clearRect(0, 0, brush.width, brush.height)
+        context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        context.beginPath()
+        context.arc(50, 50, this.state.circle, 0, 2 * Math.PI, false)
+        context.fillStyle = this.state.color
+        context.fill()
+        context.lineWidth = 1
+        context.strokeStyle = this.state.color
+        context.stroke()
+
+
+      }
 
 
       if(this.state.corpse.third!=='third'){
@@ -226,8 +239,19 @@ class Drawing extends React.Component {
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
-        ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        if(this.state.brushShape === 'rect'){
+          ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
 
+        }
+        if(this.state.brushShape === 'circ'){
+          ctx.beginPath()
+          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.fillStyle = this.state.color
+          ctx.fill()
+          ctx.lineWidth = 1
+          ctx.strokeStyle = this.state.color
+          ctx.stroke()
+        }
 
       }
       if(e.target.id ==='second' && this.state.click && !this.state.straight){
@@ -235,17 +259,37 @@ class Drawing extends React.Component {
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
-        ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        if(this.state.brushShape === 'rect'){
+          ctx.fillRect(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        }
+        if(this.state.brushShape === 'circ'){
+          ctx.beginPath()
+          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.fillStyle = this.state.color
+          ctx.fill()
+          ctx.lineWidth = 1
+          ctx.strokeStyle = this.state.color
+          ctx.stroke()
+        }
       }
-
       if(e.target.id ==='third' && this.state.click && !this.state.straight){
         canvas = document.getElementById('third')
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
-        ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        if(this.state.brushShape === 'rect'){
+          ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
 
-
+        }
+        if(this.state.brushShape === 'circ'){
+          ctx.beginPath()
+          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.fillStyle = this.state.color
+          ctx.fill()
+          ctx.lineWidth = 1
+          ctx.strokeStyle = this.state.color
+          ctx.stroke()
+        }
       }
 
       if(e.touches && e.touches[0].target.id ==='first' && this.state.click && !this.state.straight){
@@ -253,8 +297,18 @@ class Drawing extends React.Component {
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
-        ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-
+        if(this.state.brushShape === 'rect'){
+          ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        }
+        if(this.state.brushShape === 'circ'){
+          ctx.beginPath()
+          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.fillStyle = this.state.color
+          ctx.fill()
+          ctx.lineWidth = 1
+          ctx.strokeStyle = this.state.color
+          ctx.stroke()
+        }
 
       }
       if(e.touches && e.touches[0].target.id ==='second' && this.state.click && !this.state.straight){
@@ -262,7 +316,18 @@ class Drawing extends React.Component {
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
-        ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        if(this.state.brushShape === 'rect'){
+          ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        }
+        if(this.state.brushShape === 'circ'){
+          ctx.beginPath()
+          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.fillStyle = this.state.color
+          ctx.fill()
+          ctx.lineWidth = 1
+          ctx.strokeStyle = this.state.color
+          ctx.stroke()
+        }
       }
 
       if(e.touches && e.touches[0].target.id ==='third' && this.state.click && !this.state.straight){
@@ -270,8 +335,18 @@ class Drawing extends React.Component {
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
-        ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-
+        if(this.state.brushShape === 'rect'){
+          ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        }
+        if(this.state.brushShape === 'circ'){
+          ctx.beginPath()
+          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.fillStyle = this.state.color
+          ctx.fill()
+          ctx.lineWidth = 1
+          ctx.strokeStyle = this.state.color
+          ctx.stroke()
+        }
 
       }
     }
@@ -364,7 +439,7 @@ class Drawing extends React.Component {
     console.log(e.keyCode)
     if(e.keyCode === 16){
 
-      
+
       if(!this.state.straight){
         this.setState(prevState => ({
           straight: !prevState.straight
@@ -420,6 +495,11 @@ class Drawing extends React.Component {
     }
   }
 
+  brushShape(e){
+    this.setState({brushShape: e.target.id})
+    console.log(this.state)
+  }
+
 
 
   render(){
@@ -428,38 +508,73 @@ class Drawing extends React.Component {
     return(
 
       <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}  onKeyDown={this.keyDown}  onKeyUp={this.keyUp}
-      tabIndex="0">
+        tabIndex="0">
         <div className='columns is-multiline'>
           <div className='column is-4 side'>
             <SwatchesPicker onChangeComplete={ this.handleChangeComplete }/>
-            <div className='brushes'>Brush  Width : {this.state.brushW}</div>
+
+            <div className='brushes'>Brush  Shape </div>
             <div className='columns is-multiline'>
               <div className='column'>
-                <div className='brushW'id={'brushW'} onClick={this.increaseB}>
-                    +
+                <div className='brushW'id={'brushW'} onClick={this.brushShape}>
+                  <div id='rect'> Squared</div>
                 </div>
               </div>
               <div className='column'>
-                <div className='brushW'id={'brushW'}  onClick={this.decreaseB}>
-                    -
+                <div className='brushW'id={'brushW'}  onClick={this.brushShape}>
+                  <div id='circ'> Circular</div>
                 </div>
 
               </div>
             </div>
-            <div> Brush Height : {this.state.brushH}</div>
-            <div className='columns is-multiline'>
-              <div className='column'>
-                <div className='brushH'id={'brushH'} onClick={this.increaseB}>
-                    +
-                </div>
-              </div>
-              <div className='column'>
-                <div className='brushH'id={'brushH'} onClick={this.decreaseB}>
-                    -
-                </div>
 
+            {this.state.brushShape === 'circ' && <div>
+              <div className='brushes'>Brush  Size : {this.state.circle}</div>
+              <div className='columns is-multiline'>
+                <div className='column'>
+                  <div className='circle'id={'circle'} onClick={this.increaseB}>
+                      +
+                  </div>
+                </div>
+                <div className='column'>
+                  <div className='circle'id={'circle'}  onClick={this.decreaseB}>
+                      -
+                  </div>
+
+                </div>
               </div>
-            </div>
+            </div>}
+
+            {this.state.brushShape === 'rect' && <div>
+              <div className='brushes'>Brush  Width : {this.state.brushW}</div>
+              <div className='columns is-multiline'>
+                <div className='column'>
+                  <div className='brushW'id={'brushW'} onClick={this.increaseB}>
+                      +
+                  </div>
+                </div>
+                <div className='column'>
+                  <div className='brushW'id={'brushW'}  onClick={this.decreaseB}>
+                      -
+                  </div>
+
+                </div>
+              </div>
+              <div> Brush Height : {this.state.brushH}</div>
+              <div className='columns is-multiline'>
+                <div className='column'>
+                  <div className='brushH'id={'brushH'} onClick={this.increaseB}>
+                      +
+                  </div>
+                </div>
+                <div className='column'>
+                  <div className='brushH'id={'brushH'} onClick={this.decreaseB}>
+                      -
+                  </div>
+
+                </div>
+              </div>
+            </div>}
             <p>Brush</p>
             <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
 

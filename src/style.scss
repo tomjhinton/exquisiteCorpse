@@ -5,9 +5,12 @@
 
 *{
   font-weight: bold;
-  font-family: 'Passio'
-}
+  font-family: 'Passio',
 
+}
+*:focus {
+    outline: none;
+}
 
 .clip{
   clip-path: polygon(0 89%, 100% 90%, 100% 100%, 0% 100%);
@@ -59,6 +62,14 @@
 }
 
 .brushW{
+  text-align: center;
+  font-size: 2em;
+  cursor: pointer;
+  user-select: none;
+
+}
+
+.circle{
   text-align: center;
   font-size: 2em;
   cursor: pointer;
