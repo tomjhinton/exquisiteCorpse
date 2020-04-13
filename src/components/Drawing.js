@@ -109,74 +109,31 @@ class Drawing extends React.Component {
   mouseUp(e){
     let ctx, canvas
     this.setState({click: false})
-    if(e.target.id ==='first' && this.state.straight){
-      canvas = document.getElementById('first')
+    if(this.state.straight){
+      canvas = document.getElementById(e.target.id)
       ctx = canvas.getContext('2d')
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
       ctx.lineWidth = this.state.brushW
+      if(this.state.brushShape === 'circ'){
+        ctx.lineCap = 'round'
+        ctx.lineWidth = (this.state.circle *2)
+      }
       ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
       ctx.stroke()
 
 
 
     }
-    if(e.target.id ==='second' && this.state.straight){
-      canvas = document.getElementById('second')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.strokeStyle = this.state.color
-      ctx.lineWidth = this.state.brushW
-      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
-      ctx.stroke()
 
-    }
-
-    if(e.target.id ==='third' && this.state.straight){
-      canvas = document.getElementById('third')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.strokeStyle = this.state.color
-      ctx.lineWidth = this.state.brushW
-      ctx.lineTo(e.clientX-rect.left,e.clientY-rect.top)
-      ctx.stroke()
-
-
-
-    }
 
   }
 
   mouseDown(e){
     let ctx, canvas
     this.setState({click: true})
-    if(e.target.id ==='first' && this.state.straight){
-      canvas = document.getElementById('first')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.strokeStyle = this.state.color
-      ctx.lineWidth = this.state.brushW
-      ctx.beginPath()
-      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top)
-
-
-
-
-    }
-    if(e.target.id ==='second' && this.state.straight){
-      canvas = document.getElementById('second')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.strokeStyle = this.state.color
-      ctx.lineWidth = this.state.brushW
-      ctx.beginPath()
-      ctx.moveTo(e.clientX-rect.left,e.clientY-rect.top)
-
-
-    }
-
-    if(e.target.id ==='third' && this.state.straight){
-      canvas = document.getElementById('third')
+    if(this.state.straight){
+      canvas = document.getElementById(e.target.id)
       ctx = canvas.getContext('2d')
       const rect = canvas.getBoundingClientRect()
       ctx.strokeStyle = this.state.color
@@ -234,8 +191,8 @@ class Drawing extends React.Component {
     if(!this.state.fill){
 
 
-      if(e.target.id ==='first' && this.state.click && !this.state.straight){
-        canvas = document.getElementById('first')
+      if(this.state.click && !this.state.straight){
+        canvas = document.getElementById(e.target.id)
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
@@ -254,46 +211,10 @@ class Drawing extends React.Component {
         }
 
       }
-      if(e.target.id ==='second' && this.state.click && !this.state.straight){
-        canvas = document.getElementById('second')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
-        ctx.fillStyle = this.state.color
-        if(this.state.brushShape === 'rect'){
-          ctx.fillRect(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-        }
-        if(this.state.brushShape === 'circ'){
-          ctx.beginPath()
-          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
-          ctx.fillStyle = this.state.color
-          ctx.fill()
-          ctx.lineWidth = 1
-          ctx.strokeStyle = this.state.color
-          ctx.stroke()
-        }
-      }
-      if(e.target.id ==='third' && this.state.click && !this.state.straight){
-        canvas = document.getElementById('third')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
-        ctx.fillStyle = this.state.color
-        if(this.state.brushShape === 'rect'){
-          ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
 
-        }
-        if(this.state.brushShape === 'circ'){
-          ctx.beginPath()
-          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
-          ctx.fillStyle = this.state.color
-          ctx.fill()
-          ctx.lineWidth = 1
-          ctx.strokeStyle = this.state.color
-          ctx.stroke()
-        }
-      }
 
-      if(e.touches && e.touches[0].target.id ==='first' && this.state.click && !this.state.straight){
-        canvas = document.getElementById('first')
+      if(e.touches && this.state.click && !this.state.straight){
+        canvas = document.getElementById(e.touches[0].target.id)
         ctx = canvas.getContext('2d')
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
@@ -311,44 +232,7 @@ class Drawing extends React.Component {
         }
 
       }
-      if(e.touches && e.touches[0].target.id ==='second' && this.state.click && !this.state.straight){
-        canvas = document.getElementById('second')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
-        ctx.fillStyle = this.state.color
-        if(this.state.brushShape === 'rect'){
-          ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-        }
-        if(this.state.brushShape === 'circ'){
-          ctx.beginPath()
-          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
-          ctx.fillStyle = this.state.color
-          ctx.fill()
-          ctx.lineWidth = 1
-          ctx.strokeStyle = this.state.color
-          ctx.stroke()
-        }
-      }
 
-      if(e.touches && e.touches[0].target.id ==='third' && this.state.click && !this.state.straight){
-        canvas = document.getElementById('third')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
-        ctx.fillStyle = this.state.color
-        if(this.state.brushShape === 'rect'){
-          ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-        }
-        if(this.state.brushShape === 'circ'){
-          ctx.beginPath()
-          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
-          ctx.fillStyle = this.state.color
-          ctx.fill()
-          ctx.lineWidth = 1
-          ctx.strokeStyle = this.state.color
-          ctx.stroke()
-        }
-
-      }
     }
   }
 
@@ -463,35 +347,12 @@ class Drawing extends React.Component {
   fill(e){
     let canvas, ctx
     if(this.state.fill){
-      if(e.target.id ==='first'){
-        canvas = document.getElementById('first')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
 
-
-        ctx.fillStyle = this.state.color
-        ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
-
-      }
-      if(e.target.id ==='second'){
-        canvas = document.getElementById('second')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
-        ctx.fillStyle = this.state.color
-        ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
-
-      }
-
-      if(e.target.id ==='third'){
-        canvas = document.getElementById('third')
-        ctx = canvas.getContext('2d')
-        const rect = canvas.getBoundingClientRect()
-        ctx.fillStyle = this.state.color
-        ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
-
-
-      }
-
+      canvas = document.getElementById(e.target.id)
+      ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+      ctx.fillStyle = this.state.color
+      ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
     }
   }
 
