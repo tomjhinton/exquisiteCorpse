@@ -132,6 +132,9 @@ class Drawing extends React.Component {
 
   draw(e){
     let canvas, ctx
+
+
+    e.preventDefault()
     if(!this.state.fill){
 
 
