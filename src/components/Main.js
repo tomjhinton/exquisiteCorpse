@@ -57,7 +57,9 @@ class Main extends React.Component{
 
     return (
       <div className="body">
-
+        <div className='title'>
+        exquisite Corpse PAINT
+        </div>
         <div className='explanation'>
           A collaborative drawing game, take turns drawing sections of a person, beast, robot etc... The first person draws the head, the second the torso, the third the feet/tentacles/wheels.
         </div>

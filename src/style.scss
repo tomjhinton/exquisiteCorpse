@@ -3,6 +3,11 @@
   src: url("assets/Passio-Graphis.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Art-Dystopia II";
+  src: url("assets/ArtDystopia II.otf") format("opentype");
+}
+
 *{
   font-weight: bold;
   font-family: 'Passio',
@@ -155,5 +160,15 @@
 }
 
 .selected{
-  color: rgb(74,246,38)
+  color: rgb(74,246,38);
+}
+
+.title{
+  font-weight: normal;
+ font-family: 'Art-Dystopia II';
+ width: 100%;
+ font-size: 6em;
+ margin-top: 3vh;
+ text-align: center;
+
 }
