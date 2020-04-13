@@ -46,6 +46,8 @@ class Drawing extends React.Component {
     this.toggleFill = this.toggleFill.bind(this)
     this.fill = this.fill.bind(this)
     this.toggleStraight = this.toggleStraight.bind(this)
+    this.keyUp = this.keyUp.bind(this)
+    this.keyDown = this.keyDown.bind(this)
 
 
   }
@@ -62,6 +64,7 @@ class Drawing extends React.Component {
       context.clearRect(0, 0, brush.width, brush.height)
       context.fillStyle = this.state.color
       context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+
 
       if(this.state.corpse.third!=='third'){
         const final =  document.getElementById('final')
@@ -357,6 +360,31 @@ class Drawing extends React.Component {
     }
   }
 
+  keyDown(e){
+    console.log(e.keyCode)
+    if(e.keyCode === 16){
+
+      
+      if(!this.state.straight){
+        this.setState(prevState => ({
+          straight: !prevState.straight
+        }))
+      }
+    }
+  }
+
+  keyUp(e){
+
+    if(e.keyCode === 16){
+      if(this.state.straight){
+        this.setState(prevState => ({
+          straight: !prevState.straight
+        }))
+      }
+    }
+
+  }
+
   fill(e){
     let canvas, ctx
     if(this.state.fill){
@@ -399,7 +427,8 @@ class Drawing extends React.Component {
 
     return(
 
-      <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}>
+      <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}  onKeyDown={this.keyDown}  onKeyUp={this.keyUp}
+      tabIndex="0">
         <div className='columns is-multiline'>
           <div className='column is-4 side'>
             <SwatchesPicker onChangeComplete={ this.handleChangeComplete }/>
