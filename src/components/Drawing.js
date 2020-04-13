@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { SwatchesPicker } from 'react-color'
-
+import floodfill from 'floodfill'
 class Drawing extends React.Component {
 
 
@@ -20,6 +20,7 @@ class Drawing extends React.Component {
       brushH: 4,
       brushW: 4,
       image: '',
+      fill: false,
       new: {
         first: 'first',
         second: 'second',
@@ -37,6 +38,8 @@ class Drawing extends React.Component {
     this.submit = this.submit.bind(this)
     this.newGame = this.newGame.bind(this)
     this.clear = this.clear.bind(this)
+    this.toggleFill = this.toggleFill.bind(this)
+    this.fill = this.fill.bind(this)
 
   }
 
@@ -219,6 +222,45 @@ class Drawing extends React.Component {
       this.setState({ [e.target.id]: this.state[e.target.id]- 1})
     }
   }
+  toggleFill(){
+    this.setState(prevState => ({
+      fill: !prevState.fill
+    }))
+  }
+
+  fill(e){
+    let canvas, ctx
+if(this.state.fill){
+  if(e.target.id ==='first'){
+    canvas = document.getElementById('first')
+    ctx = canvas.getContext('2d')
+    const rect = canvas.getBoundingClientRect()
+
+
+    floodFill(ctx,e.clientX-rect.left, e.clientY-rect.top,  this.state.color )
+
+  }
+  if(e.target.id ==='second'){
+    canvas = document.getElementById('second')
+    ctx = canvas.getContext('2d')
+    const rect = canvas.getBoundingClientRect()
+    ctx.fillStyle = this.state.color
+    ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32);
+
+  }
+
+  if(e.target.id ==='third'){
+    canvas = document.getElementById('third')
+    ctx = canvas.getContext('2d')
+      const rect = canvas.getBoundingClientRect()
+    ctx.fillStyle = this.state.color
+    ctx.fillFlood(ctx,Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32);
+
+
+  }
+
+}
+  }
 
 
 
@@ -262,6 +304,10 @@ class Drawing extends React.Component {
             <p>Brush</p>
             <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
 
+            <div className='fill' onClick={this.toggleFill}>
+            FILL
+            </div>
+
             <div className='clear' onClick={this.clear}>
             CLEAR
             </div>
@@ -276,15 +322,15 @@ class Drawing extends React.Component {
           </div>
           <div className='column main'>
             <div className='board'>
-              {this.state.corpse && this.state.corpse.first ==='first' && this.state.corpse.third ==='third' && <canvas  className='first'  id='first' width={640} height={240} onMouseMove={this.draw}> </canvas>}
+              {this.state.corpse && this.state.corpse.first ==='first' && this.state.corpse.third ==='third' && <canvas  className='first'  id='first' width={640} height={240} onMouseMove={this.draw} onClick={this.fill}> </canvas>}
 
               {this.state.corpse.first !=='first' && this.state.corpse.third ==='third' && <img src={this.state.corpse.first} className={'firstImage '  +  (this.state.corpse.second!=='second' ? 'blur' : '') +  (this.state.corpse.second==='second' ? 'clip' : '')}/>}
 
-              {this.state.corpse && this.state.corpse.second ==='second' && this.state.corpse.first !=='first' && this.state.corpse.third ==='third' && <canvas  className='second' id='second' width={640} height={240} onMouseMove={this.draw}> </canvas>}
+              {this.state.corpse && this.state.corpse.second ==='second' && this.state.corpse.first !=='first' && this.state.corpse.third ==='third' && <canvas  className='second' id='second' width={640} height={240} onMouseMove={this.draw} onClick={this.fill}> </canvas>}
 
               {this.state.corpse.second !=='second' && this.state.corpse.third ==='third' && <img src={this.state.corpse.second} className={'secondImage'}/>}
 
-              {this.state.corpse && this.state.corpse.third ==='third' && this.state.corpse.first !=='first' && this.state.corpse.second !=='second' && <canvas  className='third' id='third' width={640} height={240} onMouseMove={this.draw}> </canvas>}
+              {this.state.corpse && this.state.corpse.third ==='third' && this.state.corpse.first !=='first' && this.state.corpse.second !=='second' && <canvas  className='third' id='third' width={640} height={240} onMouseMove={this.draw} onClick={this.fill}> </canvas>}
 
               {this.state.corpse.third !=='third' && <canvas  className='final' id='final' width={640} height={720} > </canvas>}
             </div>
