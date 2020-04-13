@@ -132,32 +132,33 @@ class Drawing extends React.Component {
 
   draw(e){
     let canvas, ctx
-
-    if(e.target.id ==='first' && this.state.click){
-      canvas = document.getElementById('first')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.fillStyle = this.state.color
-      ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-
-
-    }
-    if(e.target.id ==='second' && this.state.click){
-      canvas = document.getElementById('second')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.fillStyle = this.state.color
-      ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
-    }
-
-    if(e.target.id ==='third' && this.state.click){
-      canvas = document.getElementById('third')
-      ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-      ctx.fillStyle = this.state.color
-      ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+    if(!this.state.fill){
+      if(e.target.id ==='first' && this.state.click){
+        canvas = document.getElementById('first')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
 
 
+      }
+      if(e.target.id ==='second' && this.state.click){
+        canvas = document.getElementById('second')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+      }
+
+      if(e.target.id ==='third' && this.state.click){
+        canvas = document.getElementById('third')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+
+
+      }
     }
   }
 
@@ -230,36 +231,37 @@ class Drawing extends React.Component {
 
   fill(e){
     let canvas, ctx
-if(this.state.fill){
-  if(e.target.id ==='first'){
-    canvas = document.getElementById('first')
-    ctx = canvas.getContext('2d')
-    const rect = canvas.getBoundingClientRect()
+    if(this.state.fill){
+      if(e.target.id ==='first'){
+        canvas = document.getElementById('first')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
 
 
-    floodFill(ctx,e.clientX-rect.left, e.clientY-rect.top,  this.state.color )
+        ctx.fillStyle = this.state.color
+        ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
 
-  }
-  if(e.target.id ==='second'){
-    canvas = document.getElementById('second')
-    ctx = canvas.getContext('2d')
-    const rect = canvas.getBoundingClientRect()
-    ctx.fillStyle = this.state.color
-    ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32);
+      }
+      if(e.target.id ==='second'){
+        canvas = document.getElementById('second')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
 
-  }
+      }
 
-  if(e.target.id ==='third'){
-    canvas = document.getElementById('third')
-    ctx = canvas.getContext('2d')
-      const rect = canvas.getBoundingClientRect()
-    ctx.fillStyle = this.state.color
-    ctx.fillFlood(ctx,Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32);
+      if(e.target.id ==='third'){
+        canvas = document.getElementById('third')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillFlood(Math.floor(e.clientX-rect.left),Math.floor( e.clientY-rect.top), 32)
 
 
-  }
+      }
 
-}
+    }
   }
 
 
@@ -304,7 +306,7 @@ if(this.state.fill){
             <p>Brush</p>
             <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
 
-            <div className='fill' onClick={this.toggleFill}>
+            <div className={'fill '+  (this.state.fill ? 'selected' : '')} onClick={this.toggleFill}>
             FILL
             </div>
 
