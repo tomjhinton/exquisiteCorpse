@@ -223,7 +223,7 @@ class Drawing extends React.Component {
         }
         if(this.state.brushShape === 'circ'){
           ctx.beginPath()
-          ctx.arc(e.clientX-rect.left-(this.state.circle/2), e.clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
+          ctx.arc(e.touches[0].clientX-rect.left-(this.state.circle/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.circle, 0, 2 * Math.PI, false)
           ctx.fillStyle = this.state.color
           ctx.fill()
           ctx.lineWidth = 1
