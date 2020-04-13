@@ -133,6 +133,8 @@ class Drawing extends React.Component {
   draw(e){
     let canvas, ctx
     if(!this.state.fill){
+
+
       if(e.target.id ==='first' && this.state.click){
         canvas = document.getElementById('first')
         ctx = canvas.getContext('2d')
@@ -156,6 +158,33 @@ class Drawing extends React.Component {
         const rect = canvas.getBoundingClientRect()
         ctx.fillStyle = this.state.color
         ctx.fillRect(e.clientX-rect.left-(this.state.brushW/2), e.clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+
+
+      }
+
+      if(e.touches[0].target.id ==='first' && this.state.click){
+        canvas = document.getElementById('first')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+
+
+      }
+      if(e.touches[0].target.id ==='second' && this.state.click){
+        canvas = document.getElementById('second')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+      }
+
+      if(e.touches[0].target.id ==='third' && this.state.click){
+        canvas = document.getElementById('third')
+        ctx = canvas.getContext('2d')
+        const rect = canvas.getBoundingClientRect()
+        ctx.fillStyle = this.state.color
+        ctx.fillRect(e.touches[0].clientX-rect.left-(this.state.brushW/2), e.touches[0].clientY-rect.top-(this.state.brushH/2), this.state.brushW, this.state.brushH)
 
 
       }
@@ -271,7 +300,7 @@ class Drawing extends React.Component {
 
     return(
 
-      <div className='container' onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}>
+      <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}>
         <div className='columns is-multiline'>
           <div className='column is-4 side'>
             <SwatchesPicker onChangeComplete={ this.handleChangeComplete }/>
@@ -324,15 +353,15 @@ class Drawing extends React.Component {
           </div>
           <div className='column main'>
             <div className='board'>
-              {this.state.corpse && this.state.corpse.first ==='first' && this.state.corpse.third ==='third' && <canvas  className='first'  id='first' width={640} height={240} onMouseMove={this.draw} onClick={this.fill}> </canvas>}
+              {this.state.corpse && this.state.corpse.first ==='first' && this.state.corpse.third ==='third' && <canvas  className='first'  id='first' width={640} height={240} onMouseMove={this.draw} onTouchMove={this.draw} onClick={this.fill}> </canvas>}
 
               {this.state.corpse.first !=='first' && this.state.corpse.third ==='third' && <img src={this.state.corpse.first} className={'firstImage '  +  (this.state.corpse.second!=='second' ? 'blur' : '') +  (this.state.corpse.second==='second' ? 'clip' : '')}/>}
 
-              {this.state.corpse && this.state.corpse.second ==='second' && this.state.corpse.first !=='first' && this.state.corpse.third ==='third' && <canvas  className='second' id='second' width={640} height={240} onMouseMove={this.draw} onClick={this.fill}> </canvas>}
+              {this.state.corpse && this.state.corpse.second ==='second' && this.state.corpse.first !=='first' && this.state.corpse.third ==='third' && <canvas  className='second' id='second' width={640} height={240} onMouseMove={this.draw} onTouchMove={this.draw} onClick={this.fill}> </canvas>}
 
               {this.state.corpse.second !=='second' && this.state.corpse.third ==='third' && <img src={this.state.corpse.second} className={'secondImage'}/>}
 
-              {this.state.corpse && this.state.corpse.third ==='third' && this.state.corpse.first !=='first' && this.state.corpse.second !=='second' && <canvas  className='third' id='third' width={640} height={240} onMouseMove={this.draw} onClick={this.fill}> </canvas>}
+              {this.state.corpse && this.state.corpse.third ==='third' && this.state.corpse.first !=='first' && this.state.corpse.second !=='second' && <canvas  className='third' id='third' width={640} height={240} onMouseMove={this.draw} onTouchMove={this.draw} onClick={this.fill}> </canvas>}
 
               {this.state.corpse.third !=='third' && <canvas  className='final' id='final' width={640} height={720} > </canvas>}
             </div>
