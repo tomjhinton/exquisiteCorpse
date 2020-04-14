@@ -446,7 +446,8 @@ class Drawing extends React.Component {
             </div>}
             <p>Brush</p>
             <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
-
+            <div className='columns'>
+              <div className='column'>
             <div className={'fill '+  (this.state.fill ? 'selected' : '')} onClick={this.toggleFill}>
             FILL
             </div>
@@ -454,7 +455,8 @@ class Drawing extends React.Component {
             <div className={'straight '+  (this.state.straight ? 'selected' : '')} onClick={this.toggleStraight}>
             Straight Line
             </div>
-
+            </div>
+            <div className='column'>
             <div className='clear' onClick={this.clear}>
             CLEAR
             </div>
@@ -465,6 +467,8 @@ class Drawing extends React.Component {
 
             <div className='new' onClick={this.newGame}>
             New Game
+            </div>
+            </div>
             </div>
           </div>
           <div className='column main'>

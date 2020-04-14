@@ -114,13 +114,14 @@
 .clear{
   cursor: pointer;
   text-decoration: underline;
-  margin-top: 3vw;
+  margin-top: 2vw;
+
 }
 
 .fill{
   cursor: pointer;
   text-decoration: underline;
-  margin-top: 1vw;
+  margin-top: 2vw;
 }
 
 .straight{
@@ -132,6 +133,7 @@
 
 .brush{
   border: 1px solid black;
+  margin-left: 30%;
 }
 
 .board{
