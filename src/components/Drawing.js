@@ -63,6 +63,13 @@ class Drawing extends React.Component {
       context.fillStyle = this.state.color
       if(this.state.brushShape === 'rect'){
         context.fillRect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+        if(this.state.color === '#ffffff'){
+          context.beginPath()
+          context.lineWidth = 0.1
+          context.strokeStyle = 'black'
+          context.rect(50-(this.state.brushW/2),50-(this.state.brushH/2), this.state.brushW, this.state.brushH)
+          context.stroke()
+        }
       }
       if(this.state.brushShape === 'circ'){
         context.clearRect(0, 0, brush.width, brush.height)
@@ -73,6 +80,11 @@ class Drawing extends React.Component {
         context.fill()
         context.lineWidth = 1
         context.strokeStyle = this.state.color
+        if(this.state.color === '#ffffff'){
+          context.lineWidth = 0.1
+          context.strokeStyle = 'black'
+        }
+
         context.stroke()
 
 
@@ -291,6 +303,7 @@ class Drawing extends React.Component {
 
   handleChangeComplete(color){
     this.setState({ color: color.hex })
+    console.log(color.hex)
   }
 
   increaseB(e){
@@ -446,6 +459,7 @@ class Drawing extends React.Component {
             </div>}
             <p>Brush</p>
             <canvas  className='brush' id='brush' width={100} height={100} > </canvas>
+            {this.state.color === '#ffffff' && <div>All of brush is white, just showing the outline here for scale</div>}
             <div className='columns'>
               <div className='column'>
                 <div className={'fill '+  (this.state.fill ? 'selected' : '')} onClick={this.toggleFill}>
