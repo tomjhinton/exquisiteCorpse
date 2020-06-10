@@ -46,6 +46,7 @@ class Drawing extends React.Component {
     this.keyUp = this.keyUp.bind(this)
     this.keyDown = this.keyDown.bind(this)
     this.brushShape = this.brushShape.bind(this)
+    this.closeModal = this.closeModal.bind(this)
 
 
   }
@@ -382,10 +383,13 @@ class Drawing extends React.Component {
     console.log(this.state)
   }
 
+  closeModal(e){
+
+  }
 
 
   render(){
-
+    console.log(this.props)
 
     return(
 
@@ -395,6 +399,8 @@ class Drawing extends React.Component {
           <div className="modal-background"></div>
           <div className="modal-content">
             Send the URL to a friend for them to draw the next panel.
+            <br/>
+            {'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname}
           </div>
           <button className="modal-close is-large " aria-label="close"></button>
         </div>
