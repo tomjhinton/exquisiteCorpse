@@ -391,12 +391,12 @@ class Drawing extends React.Component {
 
       <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}  onKeyDown={this.keyDown}  onKeyUp={this.keyUp}
         tabIndex="0">
-        <div className="modal">
+        <div className="modal is-active">
           <div className="modal-background"></div>
           <div className="modal-content">
-
+            Send the URL to a friend for them to draw the next panel.
           </div>
-          <button className="modal-close is-large" aria-label="close"></button>
+          <button className="modal-close is-large " aria-label="close"></button>
         </div>
         <div className='columns is-multiline'>
           <div className='column is-4 side'>
