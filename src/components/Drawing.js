@@ -384,6 +384,10 @@ class Drawing extends React.Component {
   }
 
   closeModal(e){
+    e.preventDefault()
+    console.log(e)
+    const modal = document.getElementById('modal')
+    modal.classList.remove('is-active')
 
   }
 
@@ -395,14 +399,14 @@ class Drawing extends React.Component {
 
       <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}  onKeyDown={this.keyDown}  onKeyUp={this.keyUp}
         tabIndex="0">
-        <div className="modal is-active">
+        <div className="modal is-active" id='modal'>
           <div className="modal-background"></div>
           <div className="modal-content">
             Send the URL to a friend for them to draw the next panel.
             <br/>
             {'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname}
           </div>
-          <button className="modal-close is-large " aria-label="close"></button>
+          <button className="modal-close is-large " aria-label="close" onClick={this.closeModal}></button>
         </div>
         <div className='columns is-multiline'>
           <div className='column is-4 side'>
