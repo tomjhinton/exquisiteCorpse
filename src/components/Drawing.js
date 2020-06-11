@@ -270,6 +270,8 @@ class Drawing extends React.Component {
       this.setState({corpse: corpse})
       axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
         .then(res => console.log(res))
+      const modal = document.getElementById('modal')
+      modal.classList.add('is-active')
 
 
     } else if(this.state.corpse.second ==='second'){
@@ -282,6 +284,8 @@ class Drawing extends React.Component {
       this.setState({corpse: corpse})
       axios.put(`/api/drawings/${this.props.match.params.id}`, corpse)
         .then(res => console.log(res))
+      const modal = document.getElementById('modal')
+      modal.classList.add('is-active')
 
     } else if(this.state.corpse.third ==='third'){
       canvas = document.getElementById('third')
@@ -399,7 +403,7 @@ class Drawing extends React.Component {
 
       <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}  onKeyDown={this.keyDown}  onKeyUp={this.keyUp}
         tabIndex="0">
-        <div className="modal is-active" id='modal'>
+        <div className="modal" id='modal'>
           <div className="modal-background"></div>
           <div className="modal-content">
             Send the URL to a friend for them to draw the next panel.
