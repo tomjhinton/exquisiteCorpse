@@ -47,6 +47,7 @@ class Drawing extends React.Component {
     this.keyDown = this.keyDown.bind(this)
     this.brushShape = this.brushShape.bind(this)
     this.closeModal = this.closeModal.bind(this)
+    this.copyToClipboard = this.copyToClipboard.bind(this)
 
 
   }
@@ -395,6 +396,15 @@ class Drawing extends React.Component {
 
   }
 
+  copyToClipboard(){
+    var dummy = document.createElement('textarea')
+    document.body.appendChild(dummy)
+    dummy.value = 'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname
+    dummy.select()
+    document.execCommand('copy')
+    document.body.removeChild(dummy)
+  }
+
 
   render(){
     console.log(this.props)
@@ -403,12 +413,21 @@ class Drawing extends React.Component {
 
       <div className='container' onMouseDown={this.mouseDown} onTouchStart={this.mouseDown} onMouseUp={this.mouseUp} onTouchEnd={this.mouseUp}  onKeyDown={this.keyDown}  onKeyUp={this.keyUp}
         tabIndex="0">
-        <div className="modal" id='modal'>
+        <div className="modal is-active" id='modal'>
           <div className="modal-background"></div>
           <div className="modal-content">
             Send the URL to a friend for them to draw the next panel.
             <br/>
-            {'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname}
+            <div id='url'>{'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname}</div>
+            {
+         /* Logical shortcut for only displaying the
+            button if the copy command exists */
+         document.queryCommandSupported('copy') &&
+          <div>
+            <button onClick={this.copyToClipboard}>Copy</button>
+            {this.state.copySuccess}
+          </div>
+        }
           </div>
           <button className="modal-close is-large " aria-label="close" onClick={this.closeModal}></button>
         </div>
