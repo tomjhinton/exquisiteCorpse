@@ -397,7 +397,9 @@ class Drawing extends React.Component {
   }
 
   copyToClipboard(){
-    var dummy = document.createElement('textarea')
+    const but = document.getElementById('button')
+    but.classList.add('ripple')
+    const dummy = document.createElement('textarea')
     document.body.appendChild(dummy)
     dummy.value = 'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname
     dummy.select()
@@ -424,7 +426,7 @@ class Drawing extends React.Component {
             button if the copy command exists */
          document.queryCommandSupported('copy') &&
           <div>
-            <button onClick={this.copyToClipboard}>Copy</button>
+            <button onClick={this.copyToClipboard} id='button'>Copy</button>
             {this.state.copySuccess}
           </div>
         }
