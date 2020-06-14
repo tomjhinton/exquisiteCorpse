@@ -418,7 +418,9 @@ class Drawing extends React.Component {
         <div className="modal is-active" id='modal'>
           <div className="modal-background"></div>
           <div className="modal-content">
+            <div id='copy'>
             Send the URL to a friend for them to draw the next panel.
+            </div>
             <br/>
             <div id='url'>{'https://exquisitecorpsepaint.herokuapp.com/#'+this.props.location.pathname}</div>
             {
